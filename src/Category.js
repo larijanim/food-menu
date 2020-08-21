@@ -10,27 +10,37 @@ class Category extends Component {
 
     state = {
         catvalue:this.props.catTitle ,
+        showItem:false,
     };
 
     handleCatClicked = (event)=> {
-        this.setState({ catvalue: event.target.value });
+        this.setState({ catvalue: event.target.value,
+            showItem: true});
+
+
         // console.log(this.props);
         //this.props.moveMe(this.props.cbook, event.target.value);
     }
 
     render() {
         return (
-            <div>
-                <p><button value={this.state.catvalue} onClick={(event) => this.handleCatClicked(event)}>   {this.props.catTitle}</button></p>
+            <div className="card card-body mb-3">
+            <div className="row">
+                <div className="col-md-3">
+                    <button className="btn btn-secondary"
+                            value={this.state.catvalue}
+                            onClick={(event) => this.handleCatClicked(event)}>   {this.props.catTitle}
+                    </button>
+                </div>
+                <div className="col-md-9">
+                        {this.state.showItem &&<Item
+                            catTitle={this.state.catvalue}
+                            itemList={this.props.itemList}
+                        /> }
+                    </div>
 
 
-                    <Item
-                              catTitle={this.state.catvalue}
-                             // catIndex={this.props.catIndex}
-                             //foodinCat={this.props.foodList.filter(food=>(food.cat===cat.title))}
-                             // moveB={this.props.onUpdate}
-                    />
-
+            </div>
             </div>
         );
     }
